@@ -7,5 +7,6 @@
     - директория .idea
     - виртуальное окружение venv
  
- ##Lesson_3
+ ## Lesson_3
+ 
  Add new line
