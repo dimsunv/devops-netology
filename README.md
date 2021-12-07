@@ -6,3 +6,6 @@
     - файлы terraform.rc, override.tf, override.tf.json, crash.log
     - директория .idea
     - виртуальное окружение venv
+ 
+ ##Lesson_3
+ Add new line
