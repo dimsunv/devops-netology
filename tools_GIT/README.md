@@ -86,6 +86,13 @@ Author: Pam Selle <204372+pselle@users.noreply.github.com>
 Date:   Mon Jan 13 16:50:05 2020 -0500
 
     Remove config.go and update things using its aliases
+
+$ git show -q 52dbf94834
+commit 52dbf94834cb970b510f2fba853a5b49ad9b1a46
+Author: James Bardin <j.bardin@gmail.com>
+Date:   Wed Aug 9 17:46:49 2017 -0400
+
+    keep .terraform.d/plugins for discovery
 	
 $ git show -q 41ab0aef7a
 commit 41ab0aef7a0fe030e84018973a64135b11abcd70
