@@ -1,6 +1,7 @@
 # Домашнее задание к занятию «2.4. Инструменты Git»
 
 1. Найдите полный хеш и комментарий коммита, хеш которого начинается на aefea.
+
 '''
 $ git show -q aefea
 commit aefead2207ef7e2aa5dc81a34aedf0cad4c32545
@@ -11,6 +12,7 @@ Date:   Thu Jun 18 10:29:58 2020 -0400
 '''
 
 2. Какому тегу соответствует коммит 85024d3?
+
 '''
 $ git show -q 85024d3
 commit 85024d3100126de36331c6982bfaac02cdab9e76 (tag: v0.12.23)
@@ -19,12 +21,14 @@ Date:   Thu Mar 5 20:56:10 2020 +0000
 '''
 
 3. Сколько родителей у коммита b8d720? Напишите их хеши.
+
 '''
 $ git log --pretty=%P -n 1 b8d720
 56cd7859e05c36c06b56d013b55a252d0bb7e158 9ea88f22fc6269854151c571162c5bcf958bee2b
 '''
 
 4. Перечислите хеши и комментарии всех коммитов которые были сделаны между тегами v0.12.23 и v0.12.24.
+
 '''
 $ git log --oneline v0.12.23...v0.12.24
 33ff1c03b (tag: v0.12.24) v0.12.24
@@ -40,6 +44,7 @@ dd01a3507 Update CHANGELOG.md
 '''
 
 5. Найдите коммит в котором была создана функция func providerSource, ее определение в коде выглядит так func providerSource(...) (вместо троеточего перечислены аргументы).
+
 '''
 $ git grep -n 'func providerSource('
 provider_source.go:23:func providerSource(configs []*cliconfig.ProviderInstallation, services *disco.Disco) (getproviders.Source, tfdiags.Diagnostics) {
@@ -60,6 +65,7 @@ Date:   Tue Apr 21 16:28:59 2020 -0700
 '''
 
 6. Найдите все коммиты в которых была изменена функция globalPluginDirs.
+
 '''
 $ git grep -n 'func globalPluginDirs('
 plugins.go:18:func globalPluginDirs() []string {
