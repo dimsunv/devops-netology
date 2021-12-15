@@ -105,3 +105,33 @@ Date:   Wed Aug 9 10:34:11 2017 -0400
     attempted to search for OS_ARCH subdirectories. It has since been
     changed only search explicit paths.
 ```
+
+7. Кто автор функции `synchronizedWriters`?
+```
+$ git log -S "func synchronizedWriters("
+commit bdfea50cc85161dea41be0fe3381fd98731ff786
+Author: James Bardin <j.bardin@gmail.com>
+Date:   Mon Nov 30 18:02:04 2020 -0500
+
+    remove unused
+
+commit 5ac311e2a91e381e2f52234668b49ba670aa0fe5
+Author: Martin Atkins <mart@degeneration.co.uk>
+Date:   Wed May 3 16:25:41 2017 -0700
+
+    main: synchronize writes to VT100-faker on Windows
+
+    We use a third-party library "colorable" to translate VT100 color
+    sequences into Windows console attribute-setting calls when Terraform is
+    running on Windows.
+
+    colorable is not concurrency-safe for multiple writes to the same console,
+    because it writes to the console one character at a time and so two
+    concurrent writers get their characters interleaved, creating unreadable
+    garble.
+
+    Here we wrap around it a synchronization mechanism to ensure that there
+    can be only one Write call outstanding across both stderr and stdout,
+    mimicking the usual behavior we expect (when stderr/stdout are a normal
+    file handle) of each Write being completed atomically.
+```
