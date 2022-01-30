@@ -110,11 +110,11 @@
     - DISK: size_bytes и avail_bytes покажут объём и свободное место; readonly=1 может говорить о проблемах ФС, из-за чего она перешла в режим только для чтения; io_now - интенсивность работы с диском в текущий момент.
     ```shell
     # TYPE node_filesystem_avail_bytes gauge
-    node_filesystem_avail_bytes{device="/dev/mapper/vgvagrant-root",fstype="ext4",mountpoint="/"} 6.0764639232e+10
+    node_filesystem_avail_bytes 6.0764639232e+10
     # TYPE node_filesystem_readonly gauge
-    node_filesystem_readonly{device="/dev/mapper/vgvagrant-root",fstype="ext4",mountpoint="/"} 0
+    node_filesystem_readonly 0
     # TYPE node_filesystem_size_bytes gauge
-    node_filesystem_size_bytes{device="/dev/mapper/vgvagrant-root",fstype="ext4",mountpoint="/"} 6.5827115008e+10
+    node_filesystem_size_bytes 6.5827115008e+10
     # TYPE node_disk_io_now gauge
     node_disk_io_now{device="sda"} 0
     ```
@@ -126,7 +126,7 @@
     # TYPE node_network_carrier_up_changes_total counter
     node_network_carrier_up_changes_total{device="eth0"} 1
     # TYPE node_network_info gauge
-    node_network_info{address="08:00:27:73:60:cf",broadcast="ff:ff:ff:ff:ff:ff",device="eth0",duplex="full",ifalias="",operstate="up"} 1
+    node_network_info 1
     # TYPE node_network_mtu_bytes gauge
     node_network_mtu_bytes{device="eth0"} 1500
     # TYPE node_network_receive_errs_total counter
@@ -138,7 +138,8 @@
     # TYPE node_network_transmit_packets_total counter
     node_network_transmit_packets_total{device="eth0"} 279
     ```
-   
+    - Все эти значения можно подсмотреть в Grafana. Там языком Grafana метрики представлены в читаемом виде.
+
 1. Ознакомьтесь с опциями node_exporter и выводом `/metrics` по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.
     ![](img/node_metrics.png)
     
