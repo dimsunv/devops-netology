@@ -90,3 +90,35 @@
     sleep 1
     done
     ```
+5. *Мы хотим, чтобы у нас были красивые сообщения для коммитов в репозиторий. Для этого нужно написать локальный хук для git, который будет проверять, что сообщение в коммите содержит код текущего задания в квадратных скобках и количество символов в сообщении не превышает 30. Пример сообщения: [04-script-01-bash] сломал хук.
+    ```
+    val=$(grep -c "\[[[:digit:]]*-[[:alpha:]]*-[[:digit:]]*-[[:alpha:]]*\]" "$1")
+    len=$(cat "$1" | wc -m )
+    
+    if [[ "$val" -eq "0" ]]; then 
+        echo -e "Commit message does not match format.\nPlease change your commit according to the pattern:\n\033[31m[number-lesson-number-lecture]\033[0m"
+        exit 1
+    elif [[ "$len" -gt "30" ]]; then 
+        echo -e "\033[31mThe commit size exceeded 30 characters\033[0m"
+        exit 1
+    fi
+    echo -e "\033[33mGood Commit!\033[0m"
+    exit 0
+    ```
+    ```
+    serafim@ROOT MINGW64 /e/myProject/test (master)
+    $ git commit -m "01-script-03-bash"
+    Commit message does not match format.
+    Please change your commit according to the pattern:
+    [number-lesson-number-lecture]
+    
+    serafim@ROOT MINGW64 /e/myProject/test (master)
+    $ git commit -m "[01-script-03-bashrhfirhfiruhfuirhfuirhfuihruifhujvnsfvnasovnaonvunfuihruifhruif]"
+    The commit size exceeded 30 characters
+    
+    serafim@ROOT MINGW64 /e/myProject/test (master)
+    $ git commit -m "[01-script-03-bash]"
+    Good Commit!
+    [master 734c82a] [01-script-03-bash]
+     2 files changed, 4 insertions(+), 2 deletions(-)
+    ```
