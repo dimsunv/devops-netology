@@ -55,14 +55,14 @@
     gitdir = ""
     
     try:
-        path = os.listdir(sys.argv[1]) #проверка что путь - папка
-    except NotADirectoryError:
+        gitdir = sys.argv[1] #проверка что путь задан
+    except:
         print("Incorrect path")
         exit()
     
     try:
-        gitdir = sys.argv[1] #проверка что путь задан
-    except:
+        path = os.listdir(sys.argv[1]) #проверка что путь - папка
+    except NotADirectoryError:
         print("Incorrect path")
         exit()
     
