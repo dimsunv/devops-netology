@@ -121,8 +121,68 @@ mail.google.com: 108.177.14.19
 
 ### Ваш скрипт:
 ```python
-???
+import sys
+from os import path
+import json
+import yaml
+
+file = sys.argv[1]
+full_name = path.splitext(path.basename(file))
+
+
+def check_json():
+    with open(file, 'r', encoding='utf_8') as f:
+        try:
+            j = json.load(f)
+            if full_name[1] == '.json':
+                print('Это JSON', '\n', j)
+            else:
+                print('Это JSON', '\n', j)
+                new_file = full_name[0] + '.json'
+                with open(new_file, 'w') as n:
+                    json.dump(j, n, indent=2, sort_keys=True)
+        except json.decoder.JSONDecodeError as exc:
+            print('Это не JSON, или в файле ошибка', '\n', exc)
+
+
+def check_yaml():
+    with open(file, 'r', encoding='utf_8') as f:
+        try:
+            y = yaml.safe_load(f)
+            if full_name[1] == ('.yml', '.yaml'):
+                print('Это YAML', '\n', y)
+            else:
+                print('Это YAML', '\n', y)
+                new_file = full_name[0] + '.yml'
+                with open(new_file, 'w') as n:
+                    yaml.dump(y, n, indent=2, sort_keys=True)
+        except yaml.scanner.ScannerError as exc:
+            print('Это не YAML, или в файле ошибка', '\n', exc)
+
+
+# Так как json начинается с { проверяем начало файла на спецсимвол и вызываем соответствующую функцию
+def check_format():
+    with open(file, 'r', encoding='utf_8') as f:
+        if f.readline(1) in '{':
+            print("похоже это JSON")
+            check_json()
+        else:
+            print("Возможно это YAML")
+            check_yaml()
+
+
+# Проверяем расширение файла
+if full_name[1] in ('', '.json', '.yaml', '.yml'):
+    check_format()
+else:
+    print('Incorrect file format')
+    exit(0)
 ```
 
 ### Пример работы скрипта:
-???
+```
+(venv) E:\myProject\devops-netology\Practic>python test.py 2.yml
+похоже это JSON
+Это JSON
+ {'drive.google.com': '142.251.1.194', 'google.com': '173.194.221.102', 'mail.google.com': '108.177.14.19'}
+```
