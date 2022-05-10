@@ -17,6 +17,23 @@
 - Ansible
 
 *Приложить вывод команд установленных версий каждой из программ, оформленный в markdown.*
+```
+VMWare Workstation Pro 16.1
+```
+```
+E:\Vagrant_VM\debian11>vagrant -v
+Vagrant 2.2.19
+```
+```
+vagrant@server1:~$ ansible --version
+ansible 2.10.8
+  config file = /home/vagrant/ansible.cfg
+  configured module search path = ['/home/vagrant/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 3.9.2 (default, Feb 28 2021, 17:03:44) [GCC 10.2.1 20210110]
+
+```
 
 ## Задача 4 (*)
 
