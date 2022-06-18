@@ -21,6 +21,33 @@ Hey, Netology
 ```
 Опубликуйте созданный форк в своем репозитории и предоставьте ответ в виде ссылки на https://hub.docker.com/username_repo.
 
+```
+root@docker:~# cat > /home/serafim/index.html <<EOF
+> <html>
+> <head>
+> Hey, Netology
+> </head>
+> <body>
+> <h1>I’m DevOps Engineer!</h1>
+> </body>
+> </html>
+> EOF
+root@docker:~# docker run --name nginx_netology -p 80:80 -d nginx
+root@docker:~# docker cp /home/serafim/index.html nginx_netology:/usr/share/nginx/html
+root@docker:~# curl localhost:80
+<html>
+<head>
+Hey, Netology
+</head>
+<body>
+<h1>I'm DevOps Engineer!</h1>
+</body>
+</html>
+root@docker:~# docker commit nginx_netology boliwar/nginx_netology
+root@docker:~# docker push boliwar/nginx_netology
+```
+* Ссылка на репозиторий:
+https://hub.docker.com/repository/docker/boliwar/nginx_netology
 ## Задача 2
 
 Посмотрите на сценарий ниже и ответьте на вопрос:
@@ -35,7 +62,7 @@ Hey, Netology
 - Высоконагруженное монолитное java веб-приложение;
   * Высоконагруженные приложения предпочтительно размещать на физических машинах или ВМ. Необходим оперативный доступ к ресурсам.
 - Nodejs веб-приложение;
-  * Djcker вполне подойдет для легких серверных приложений.
+  * Dоcker вполне подойдет для легких серверных приложений.
 - Мобильное приложение c версиями для Android и iOS;
   * Физическое устройство с ОС Android или iOS
 - Шина данных на базе Apache Kafka;
@@ -56,8 +83,52 @@ Hey, Netology
 - Добавьте еще один файл в папку ```/data``` на хостовой машине;
 - Подключитесь во второй контейнер и отобразите листинг и содержание файлов в ```/data``` контейнера.
 
+```
+root@docker:~# docker run -it --rm -d --name centos -v $(pwd)/data:/data centos:latest
+f087646a20af2bb1069e1fb66cd6999f1a7bd4a94c5903421d4e2fc2643cd2da
+root@docker:~# docker run -it --rm -d --name debian -v $(pwd)/data:/data debian:latest
+214faf9871d5a4cc2fd27defe078932e539f2157f7a43ed0fe2135dc6d8ce012
+root@docker:~# docker ps
+CONTAINER ID   IMAGE           COMMAND       CREATED              STATUS              PORTS     NAMES
+214faf9871d5   debian:latest   "bash"        22 seconds ago       Up 19 seconds                 debian
+f087646a20af   centos:latest   "/bin/bash"   About a minute ago   Up About a minute             centos
+root@docker:~# cat /etc/*release >> data/host.txt
+root@docker:~# docker exec -it debian bash
+root@214faf9871d5:/# ls data
+centos.txt  host.txt
+```
 ## Задача 4 (*)
 
 Воспроизвести практическую часть лекции самостоятельно.
 
 Соберите Docker образ с Ansible, загрузите на Docker Hub и пришлите ссылку вместе с остальными ответами к задачам.
+
+* Dockerfile
+```
+FROM debian
+
+RUN apt-get update && \
+    apt-get dist-upgrade -y && \
+    apt-get install ansible -y && \
+    apt-get autoremove -y && \
+    apt-get autoclean -y
+
+RUN mkdir /ansible && \
+    mkdir -p /etc/ansible && \
+    echo 'localhost' > /etc/ansible/hosts
+
+WORKDIR /ansible
+
+CMD [ "ansible-playbook", "--version" ]
+```
+```
+root@docker:~/myproject# docker run boliwar/ansible_netology:2.10.8
+ansible-playbook 2.10.8
+  config file = None
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  executable location = /usr/bin/ansible-playbook
+  python version = 3.9.2 (default, Feb 28 2021, 17:03:44) [GCC 10.2.1 20210110]
+```
+*Ссылка на репозиторий:
+https://hub.docker.com/repository/docker/boliwar/ansible_netology
