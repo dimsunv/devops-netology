@@ -47,7 +47,7 @@ root@docker:~# docker commit nginx_netology boliwar/nginx_netology
 root@docker:~# docker push boliwar/nginx_netology
 ```
 * Ссылка на репозиторий:
-https://hub.docker.com/repository/docker/boliwar/nginx_netology
+[Docker hub](https://hub.docker.com/repository/docker/boliwar/nginx_netology)
 ## Задача 2
 
 Посмотрите на сценарий ниже и ответьте на вопрос:
@@ -131,4 +131,4 @@ ansible-playbook 2.10.8
   python version = 3.9.2 (default, Feb 28 2021, 17:03:44) [GCC 10.2.1 20210110]
 ```
 *Ссылка на репозиторий:
-https://hub.docker.com/repository/docker/boliwar/ansible_netology
+[Docker hub](https://hub.docker.com/repository/docker/boliwar/ansible_netology)
