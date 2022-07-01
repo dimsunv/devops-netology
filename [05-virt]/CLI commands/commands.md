@@ -5,8 +5,9 @@ pritunl-client list
 pritunl-client start
 pritunl-client stop
 pritunl-client remove
-# поверить ip
+# поверить внешний ip
 wget -qO- eth0.me
+curl ifconfig.co
 ```
 ###YC
 ```
