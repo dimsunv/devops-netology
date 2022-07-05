@@ -28,11 +28,6 @@ locals {
     prod = 2
   }
 
-  folder_id = {
-    stage = "b1gu7omt3rvli2upb261",
-    prod  = "b1g6283bu42g39eli32h"
-  }
-
   vpc_subnets = {
     stage = [
       {

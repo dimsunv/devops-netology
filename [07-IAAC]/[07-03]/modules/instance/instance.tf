@@ -17,6 +17,15 @@ variable disk_size { default =  "20" }
 variable zone { default =  "" }
 variable folder_id { default =  "" }
 
+terraform {
+  required_providers {
+    yandex = {
+      source  = "yandex-cloud/yandex"
+      version = "0.61.0"
+    }
+  }
+}
+
 data "yandex_compute_image" "image" {
   family = var.image
 }
