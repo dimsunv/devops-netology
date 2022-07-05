@@ -1,10 +1,19 @@
+module "vpc" {
+  source        = "../modules/vpc"
+  description   = "managed by terraform"
+  create_folder = length(var.yc_folder_id) > 0 ? false : true
+  yc_folder_id  = var.yc_folder_id
+  name          = terraform.workspace
+  subnets       = local.vpc_subnets[terraform.workspace]
+}
+
 module "news" {
   source = "../modules/instance"
   instance_count = local.news_instance_count[terraform.workspace]
 
   subnet_id     = module.vpc.subnet_ids[0]
-  zone = var.yc_region
-  folder_id = module.vpc.folder_id
+  zone          = var.yc_region
+  folder_id     = module.vpc.folder_id
   image         = "centos-7"
   platform_id   = "standard-v2"
   name          = "news"
@@ -17,6 +26,7 @@ module "news" {
   nat           = "true"
   memory        = "2"
   core_fraction = "100"
+
   depends_on = [
     module.vpc
   ]

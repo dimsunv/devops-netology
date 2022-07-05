@@ -1,11 +1,5 @@
-module.net.data.yandex_compute_image.nat_instance: Reading...
-module.net.yandex_vpc_network.this: Refreshing state... [id=enp69n8moero4rjbgp6k]
-module.net.data.yandex_compute_image.nat_instance: Read complete after 2s [id=fd8db00ao65g90ce0tsn]
-module.net.yandex_vpc_subnet.this["ru-central1-a"]: Refreshing state... [id=e9bmpsjpcplf11fb9dvg]
-module.iam.yandex_iam_service_account.resource: Refreshing state... [id=ajeq0rhom651mvjjg8vf]
-module.iam.yandex_iam_service_account_static_access_key.sa-static-key: Refreshing state... [id=ajepq1o1bjfl8fgic55d]
-module.iam.yandex_resourcemanager_folder_iam_binding.editor: Refreshing state... [id=b1g6283bu42g39eli32h/storage.editor]
-module.bucket.yandex_storage_bucket.netology: Refreshing state... [id=prod-tf-bucket]
+module.vpc.data.yandex_compute_image.nat_instance: Reading...
+module.vpc.data.yandex_compute_image.nat_instance: Read complete after 2s [id=fd8db00ao65g90ce0tsn]
 
 Terraform used the selected providers to generate the following execution
 plan. Resource actions are indicated with the following symbols:
@@ -13,38 +7,6 @@ plan. Resource actions are indicated with the following symbols:
  <= read (data resources)
 
 Terraform will perform the following actions:
-
-  # module.net.yandex_vpc_subnet.this["ru-central1-b"] will be created
-  + resource "yandex_vpc_subnet" "this" {
-      + created_at     = (known after apply)
-      + description    = "managed by terraform prod subnet for zone ru-central1-b"
-      + folder_id      = "b1g6283bu42g39eli32h"
-      + id             = (known after apply)
-      + labels         = (known after apply)
-      + name           = "prod-ru-central1-b"
-      + network_id     = "enp69n8moero4rjbgp6k"
-      + v4_cidr_blocks = [
-          + "172.17.0.0/24",
-        ]
-      + v6_cidr_blocks = (known after apply)
-      + zone           = "ru-central1-b"
-    }
-
-  # module.net.yandex_vpc_subnet.this["ru-central1-c"] will be created
-  + resource "yandex_vpc_subnet" "this" {
-      + created_at     = (known after apply)
-      + description    = "managed by terraform prod subnet for zone ru-central1-c"
-      + folder_id      = "b1g6283bu42g39eli32h"
-      + id             = (known after apply)
-      + labels         = (known after apply)
-      + name           = "prod-ru-central1-c"
-      + network_id     = "enp69n8moero4rjbgp6k"
-      + v4_cidr_blocks = [
-          + "172.18.0.0/24",
-        ]
-      + v6_cidr_blocks = (known after apply)
-      + zone           = "ru-central1-c"
-    }
 
   # module.news.data.yandex_compute_image.image will be read during apply
   # (depends on a resource or a module with changes pending)
@@ -69,7 +31,7 @@ Terraform will perform the following actions:
   + resource "yandex_compute_instance" "instance" {
       + created_at                = (known after apply)
       + description               = "News App Demo"
-      + folder_id                 = "b1g6283bu42g39eli32h"
+      + folder_id                 = (known after apply)
       + fqdn                      = (known after apply)
       + hostname                  = "news-1"
       + id                        = (known after apply)
@@ -111,7 +73,7 @@ Terraform will perform the following actions:
           + nat_ip_address     = (known after apply)
           + nat_ip_version     = (known after apply)
           + security_group_ids = (known after apply)
-          + subnet_id          = "module.vpc.subnet_ids[0]"
+          + subnet_id          = (known after apply)
         }
 
       + placement_policy {
@@ -134,7 +96,7 @@ Terraform will perform the following actions:
   + resource "yandex_compute_instance" "instance" {
       + created_at                = (known after apply)
       + description               = "News App Demo"
-      + folder_id                 = "b1g6283bu42g39eli32h"
+      + folder_id                 = (known after apply)
       + fqdn                      = (known after apply)
       + hostname                  = "news-2"
       + id                        = (known after apply)
@@ -176,7 +138,7 @@ Terraform will perform the following actions:
           + nat_ip_address     = (known after apply)
           + nat_ip_version     = (known after apply)
           + security_group_ids = (known after apply)
-          + subnet_id          = "module.vpc.subnet_ids[0]"
+          + subnet_id          = (known after apply)
         }
 
       + placement_policy {
@@ -195,7 +157,76 @@ Terraform will perform the following actions:
         }
     }
 
-Plan: 4 to add, 0 to change, 0 to destroy.
+  # module.vpc.yandex_resourcemanager_folder.folder[0] will be created
+  + resource "yandex_resourcemanager_folder" "folder" {
+      + cloud_id    = (known after apply)
+      + created_at  = (known after apply)
+      + description = "terraform managed"
+      + id          = (known after apply)
+      + name        = "prod"
+    }
+
+  # module.vpc.yandex_vpc_network.this will be created
+  + resource "yandex_vpc_network" "this" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + description               = "managed by terraform prod network"
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "prod"
+      + subnet_ids                = (known after apply)
+    }
+
+  # module.vpc.yandex_vpc_subnet.this["ru-central1-a"] will be created
+  + resource "yandex_vpc_subnet" "this" {
+      + created_at     = (known after apply)
+      + description    = "managed by terraform prod subnet for zone ru-central1-a"
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "prod-ru-central1-a"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "172.16.0.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+  # module.vpc.yandex_vpc_subnet.this["ru-central1-b"] will be created
+  + resource "yandex_vpc_subnet" "this" {
+      + created_at     = (known after apply)
+      + description    = "managed by terraform prod subnet for zone ru-central1-b"
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "prod-ru-central1-b"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "172.17.0.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-b"
+    }
+
+  # module.vpc.yandex_vpc_subnet.this["ru-central1-c"] will be created
+  + resource "yandex_vpc_subnet" "this" {
+      + created_at     = (known after apply)
+      + description    = "managed by terraform prod subnet for zone ru-central1-c"
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "prod-ru-central1-c"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "172.18.0.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-c"
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
 
 ─────────────────────────────────────────────────────────────────────────────
 
