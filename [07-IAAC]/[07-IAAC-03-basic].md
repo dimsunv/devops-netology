@@ -35,5 +35,5 @@ boliwar@netology:~/[07-03]/bucket$ terraform workspace list
 ```
 
 * Вывод команды `terraform plan` для воркспейса `prod`
-    - [Исходники]()
-    - [terraform plan]()
+    - [Исходники](https://github.com/dimsunv/devops-netology/tree/main/%5B07-IAAC%5D/%5B07-03%5D)
+    - [terraform plan](https://github.com/dimsunv/devops-netology/blob/main/%5B07-IAAC%5D/%5B07-03%5D/tf_plan.txt)
