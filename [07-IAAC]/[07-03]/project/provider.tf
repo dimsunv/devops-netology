@@ -9,8 +9,8 @@ terraform {
     bucket     = "netology-tf-bucket"
     region     = "ru-central1-a"
     key        = "netology/terraform.tfstate"
-    access_key = "YCAJEBTyWAoIL_dxcJ_hKMkO3"
-    secret_key = "YCP0O6ePUGefpvbEOQWpNBngnq6gYrS0ymZlQgTu"
+    access_key = "YХХХХХХХХХХХХХХ3"
+    secret_key = "YХХХХХХХХХХХХХХХХХХХХХХХХu"
 
     skip_region_validation      = true
     skip_credentials_validation = true
