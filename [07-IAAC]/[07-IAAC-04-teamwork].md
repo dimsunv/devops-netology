@@ -31,7 +31,7 @@
 1. Необходимо включить автопланирование при изменении любых файлов `*.tf`.
 
 В качестве результата приложите ссылку на файлы `server.yaml` и `atlantis.yaml`.
-
+  * [Atlantis](https://github.com/dimsunv/devops-netology/tree/main/%5B07-IAAC%5D/atlantis)
 ## Задача 3. Знакомство с каталогом модулей. 
 
 1. В [каталоге модулей](https://registry.terraform.io/browse/modules) найдите официальный модуль от aws для создания
