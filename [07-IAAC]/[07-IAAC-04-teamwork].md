@@ -42,3 +42,9 @@
 Создайте аналогичный инстанс при помощи найденного модуля.   
 
 В качестве результата задания приложите ссылку на созданный блок конфигураций.
+
+ * Для yandex cloud всего 10 модулей. Модулей для создания инстансов нет. И в текущей ситуации использование terraform под большим вопросом.
+   Для своих заданий я использовал модули любезно предоставленные Сергеем. 
+ * [VPC](https://registry.terraform.io/modules/hamnsk/vpc/yandex/latest)
+ * [Yandex instance](https://github.com/dimsunv/devops-netology/tree/main/%5B07-IAAC%5D/%5B07-03%5D/modules/instance)
+   
