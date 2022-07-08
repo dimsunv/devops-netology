@@ -4,9 +4,9 @@ delete_source_branch_on_merge: true
 parallel_plan: true
 parallel_apply: true
 projects:
-- dir: project1
+- dir: project
   workspace: stage
-- dir: project1
+- dir: project
   workspace: prod
   terraform_version: v1.1.8
   delete_source_branch_on_merge: true
