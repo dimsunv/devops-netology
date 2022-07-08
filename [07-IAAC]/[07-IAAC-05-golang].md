@@ -37,26 +37,26 @@ go version go1.13.8 linux/amd64
         fmt.Println(output)    
     }
     ```
-```
-package main
-
-import "fmt"
-
-func Converter(m float64)(f float64) {
-	f = m * 3.281
-	return
-}
-
-func main() {
-	fmt.Print("This is a meters to feet converter\nmeters: ")
-	var input float64
-	fmt.Scanf("%f", &input)
-
-	output := Converter(input)
-
-	fmt.Printf("Feet: %.3f\n", output)
-}
-```
+    ```
+    package main
+    
+    import "fmt"
+    
+    func Converter(m float64)(f float64) {
+        f = m * 3.281
+        return
+    }
+    
+    func main() {
+        fmt.Print("This is a meters to feet converter\nmeters: ")
+        var input float64
+        fmt.Scanf("%f", &input)
+    
+        output := Converter(input)
+    
+        fmt.Printf("Feet: %.3f\n", output)
+    }
+    ```
 1. Напишите программу, которая найдет наименьший элемент в любом заданном списке, например:
     ```
     x := []int{48,96,86,68,57,82,63,70,37,34,83,27,19,97,9,17,}
