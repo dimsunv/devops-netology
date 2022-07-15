@@ -68,7 +68,7 @@
       - name: Up all services in compose
         command: docker-compose -f /opt/stack/docker-compose.yaml up -d
 
-  - hosts: node02.netology.cloud
+  - hosts: nodbecomee02.netology.cloud
     become: yes
     become_user: root
     remote_user: centos

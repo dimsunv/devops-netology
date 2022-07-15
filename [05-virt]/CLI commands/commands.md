@@ -1,5 +1,12 @@
 ###Pritunl
 ```
+sudo tee /etc/apt/sources.list.d/pritunl.list << EOF
+deb https://repo.pritunl.com/stable/apt focal main
+EOF
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A
+sudo apt-get update
+sudo apt-get install pritunl-client-electron
+
 pritunl-client add 
 pritunl-client list
 pritunl-client start
@@ -45,5 +52,15 @@ terraform apply -auto-approve
 terraform destroy -auto-approve
 ```
 ###Ansible
-ansible-playbook provision.yml
+```
+# install ubuntu 22.04
+apt install ansible
+apt install software-properties-common
+add-apt-repository --yes --update ppa:ansible/ansible
+apt remove ansible
+apt install ansible
+```
 
+###Docker
+curl -fsSL get.docker.com -o get-docker.sh && chmod +x get-docker.sh && ./get-docker.sh
+curl -L https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-`uname -s`-`uname -m` -o /usr/bin/docker-compose && chmod +x /usr/bin/docker-compose
