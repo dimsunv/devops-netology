@@ -8,7 +8,7 @@
 ## Задача 1
 
 - Используя docker поднимите инстанс MySQL (версию 8). Данные БД сохраните в volume.
-    * [docker-compose.yml]()
+    * [docker-compose.yml](https://github.com/dimsunv/devops-netology/blob/main/%5B06-DB%5D/docker-compose.my_db.yml)
     * ![my_db](img/db.png)
 
 - Изучите [бэкап БД](https://github.com/netology-code/virt-homeworks/tree/master/06-db-03-mysql/test_data) и восстановитесь из него.
