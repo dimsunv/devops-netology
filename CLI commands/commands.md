@@ -38,8 +38,14 @@ yc vpc subnet delete --name subnet-a && yc vpc network delete --name net
 packer build ./src/packer/centos-7-base.json
 ```
 ###Terraform
-
-
+```
+terraform init
+terraform workspace list
+terraform workspace new prod
+terraform plan
+terraform apply -auto-approve
+terraform destroy -auto-approve
+```
 ###Ansible
 ```
 # install ubuntu 22.04
