@@ -14,3 +14,6 @@
 - [ 03-SYSADMIN-07 ](./03-sysadmin-07-net)
 - [ 03-SYSADMIN-08 ](./03-sysadmin-08-net)
 - [ 03-SYSADMIN-09 ](./03-sysadmin-09-net)
+- [ 04-SCRIPT-01 ](./04-script-01-bash_practic)
+- [ 04-SCRIPT-02 ](./04-script-02-python_practic)
+- [ 04-SCRIPT-03 ](./04-script-03-json_yaml_practic)
