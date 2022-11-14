@@ -1,0 +1,6 @@
+---
+# tasks file for file
+- name: Creating File
+  boliwar.homework.file:
+    path: "{{ path }}"
+    content: "{{ content }}"

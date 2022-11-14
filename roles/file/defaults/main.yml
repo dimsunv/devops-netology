@@ -1,0 +1,6 @@
+---
+# defaults file for file
+path: "/tmp/test_file.txt"
+content:
+  - "test"
+  - "role"
