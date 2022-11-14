@@ -14,13 +14,13 @@
 ## Основная часть
 
 Наша цель - написать собственный module, который мы можем использовать в своей role, через playbook. Всё это должно быть собрано в виде collection и отправлено в наш репозиторий.
-
 1. В виртуальном окружении создать новый `my_own_module.py` файл
-2. Наполнить его содержимым:
+2. Наполнить его содержимым
 
 <details>
 <summary>module.py</summary>
-```python
+
+```
 #!/usr/bin/python
 
 # Copyright: (c) 2018, Terry Jones <terry.jones@example.org>
@@ -160,7 +160,7 @@ if __name__ == '__main__':
 </details>
 
 
-Или возьмите данное наполнение из [статьи](https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_general.html#creating-a-module).
+- Или возьмите данное наполнение из [статьи](https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_general.html#creating-a-module).
 
 3. Заполните файл в соответствии с требованиями ansible так, чтобы он выполнял основную задачу: module должен создавать текстовый файл на удалённом хосте по пути, определённом в параметре `path`, с содержимым, определённым в параметре `content`.
 4. Проверьте module на исполняемость локально.
