@@ -1,0 +1,25 @@
+---
+- name: ansible-clickhouse
+  src: git@github.com:dimsunv/ansible-clickhouse
+  scm: git
+  version: "1.12.2"
+
+- name: ansible-nginx
+  src: git@github.com:nginxinc/ansible-role-nginx
+  scm: git
+  version: "0.23.1"
+
+- name: ansible-git
+  src: git@github.com:geerlingguy/ansible-role-git
+  scm: git
+  version: "3.0.0"
+
+- name: ansible-vector
+  src: git@github.com:dimsunv/ansible-vector
+  scm: git
+  version: "1.0.2"
+
+- name: ansible-lighthouse
+  src: git@github.com:dimsunv/ansible-ligthouse
+  scm: git
+  version: "1.0.0"

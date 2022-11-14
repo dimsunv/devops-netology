@@ -1,0 +1,21 @@
+---
+%{ for index, ip in clickhouse_host_ip ~}
+vector_config:
+  sources:
+    our_log:
+      type: file
+      ignore_older_secs: 300
+      include:
+        - /var/log/*.log
+      read_from: beginning
+  sinks:
+    to_clickhouse:
+      type: clickhouse
+      inputs:
+        - our_log
+      database: logs
+      endpoint: http://${ip}:8183
+      table: my_table
+      compression: gzip
+      healthcheck: false
+%{ endfor ~}

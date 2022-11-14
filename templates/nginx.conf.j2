@@ -1,0 +1,47 @@
+user  root;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+worker_rlimit_nofile 1048576;
+
+events {
+    worker_connections  102400;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout     65;
+    proxy_connect_timeout 300;
+    proxy_send_timeout    300;
+    proxy_read_timeout    300;
+    proxy_buffer_size     128k;
+    proxy_buffers         4 256k;
+    send_timeout          300;
+
+    # буферы для запросов с большими заголовками
+    large_client_header_buffers  4 64k;
+    client_header_buffer_size    64k;
+    server_names_hash_max_size   600;
+
+    server_tokens off;
+
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    resolver 127.0.0.1 8.8.8.8;
+
+    include /etc/nginx/conf.d/*.conf;
+    #include /etc/nginx/sites-enabled/*.conf;
+}

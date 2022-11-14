@@ -1,0 +1,21 @@
+---
+#Clickhouse vars
+clickhouse_version: "22.8.4.7"
+clickhouse_dbs_custom:
+  - { name: netology, state: present }
+
+#Nginx vars
+# For Centos "-1.22.1" for debian "=1.22.1-1~release"
+nginx_user: "root"
+#nginx_version: "-1.23.1"
+nginx_version: "=1.23.1-1~jammy"
+
+#GIT vars
+git_version: "2.37.3"
+
+#lighthouse vars
+lighthouse_dir: "/var/www/html/lighthouse"
+lighthouse_repo: "https://github.com/VKCOM/lighthouse.git"
+
+#vector vars
+vector_version: "0.23.3"
