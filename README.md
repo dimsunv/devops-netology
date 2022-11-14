@@ -36,3 +36,4 @@
 - [ 08-ANSIBLE-03](./01-ansible-03-cloud)
 - [ 08-ANSIBLE-04](./01-ansible-04-roles)
 - [ 08-ANSIBLE-05](./01-ansible-05-test_roles)
+- [ 08-ANSIBLE-06](./01-ansible-06-modules)
