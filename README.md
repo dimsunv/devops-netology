@@ -22,3 +22,7 @@
 - [ 05-VIRT-03 ](./05-virt-03-docker)
 - [ 05-VIRT-04 ](./05-virt-04-docker-compose)
 - [ 05-VIRT-05 ](./05-virt-05-docker-swarm)
+- [ 06-DB-01 ](./06-db-01-basic)
+- [ 06-DB-02 ](./06-db-02-sql)
+- [ 06-DB-03 ](./06-db-03-mysql)
+- [ 06-DB-04 ](./06-db-04-postgres)
