@@ -25,7 +25,6 @@
       become: true
       ansible.builtin.yum:
         name:
-          # - update
           - clickhouse-common-static-{{ clickhouse_version }}.rpm
           - clickhouse-client-{{ clickhouse_version }}.rpm
           - clickhouse-server-{{ clickhouse_version }}.rpm
