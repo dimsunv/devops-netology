@@ -38,3 +38,4 @@
 - [ 08-ANSIBLE-05](./08-ansible-05-test_roles)
 - [ 08-ANSIBLE-06](./08-ansible-06-modules)
 - [ 09-CICD-01](./09-ci-01-jira)
+- [ 09-CICD-02](./09-ci-03-cicd)
