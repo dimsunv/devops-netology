@@ -27,5 +27,5 @@
 
 Если всё отработало в рамках ожидания - выгрузить схемы workflow для импорта в XML. Файлы с workflow приложить к решению задания.
 
-* [custom workflow for bug](https://github.com/dimsunv/devops-netology/blob/main/%5B09-ci%5D/file/custom%20for%20bug.xml)
-* [custom workflow for epic](https://github.com/dimsunv/devops-netology/blob/main/%5B09-ci%5D/file/custom%20for%20epic.xml)
+* [custom workflow for bug](https://github.com/dimsunv/devops-netology/blob/main/09-ci-01-jira/custom%20for%20bug.xml)
+* [custom workflow for epic](https://github.com/dimsunv/devops-netology/blob/main/09-ci-01-jira/custom%20for%20epic.xml)
