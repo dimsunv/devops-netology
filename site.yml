@@ -1,5 +1,5 @@
 ---
-- name: Clickhouse | Install
+- name: Clickhouse | install
   hosts: clickhouse
   tasks:
     - name: install clickhouse
