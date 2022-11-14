@@ -159,6 +159,7 @@ if __name__ == '__main__':
 
 </details>
 
+
 Или возьмите данное наполнение из [статьи](https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_general.html#creating-a-module).
 
 3. Заполните файл в соответствии с требованиями ansible так, чтобы он выполнял основную задачу: module должен создавать текстовый файл на удалённом хосте по пути, определённом в параметре `path`, с содержимым, определённым в параметре `content`.
@@ -177,4 +178,4 @@ if __name__ == '__main__':
 16. Запустите playbook, убедитесь, что он работает.
 17. В ответ необходимо прислать ссылку на репозиторий с collection
 
-[ansible create file](https://github.com/dimsunv/devops-netology/tree/1.0.0)
+* [ansible create file](https://github.com/dimsunv/devops-netology/tree/1.0.0)
