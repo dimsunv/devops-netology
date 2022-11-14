@@ -41,7 +41,7 @@
 3. Проверяем, что все файлы загрузились успешно
 4. В ответе присылаем файл `maven-metadata.xml` для этого артефекта
 
-* [maven-metadata.xml](https://github.com/dimsunv/devops-netology/blob/main/%5B09-ci%5D/file/maven-metadata.xml)
+* [maven-metadata.xml](https://github.com/dimsunv/devops-netology/blob/main/09-ci-03-cicd/file/maven-metadata.xml)
 
 ### Знакомство с Maven
 
@@ -60,4 +60,4 @@
 3. Проверяем директорию `~/.m2/repository/`, находим наш артефакт
 4. В ответе присылаем исправленный файл `pom.xml`
 
-* [pom.xml](https://github.com/dimsunv/devops-netology/blob/main/%5B09-ci%5D/file/pom.xml)
+* [pom.xml](https://github.com/dimsunv/devops-netology/blob/main/09-ci-03-cicd/file/pom.xml)
