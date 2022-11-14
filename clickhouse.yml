@@ -1,0 +1,70 @@
+---
+- name: Clickhouse | Install
+  become: yes
+  block:
+    - name: ClickHouse | Add repository
+      ansible.builtin.yum_repository:
+        name: clickhouse-stable
+        description: ClickHouse - Stable Repository
+        file: clickhouse
+        baseurl: https://packages.clickhouse.com/rpm/stable/
+        gpgkey: https://packages.clickhouse.com/rpm/stable/repodata/repomd.xml.key
+        gpgcheck: no
+        repo_gpgcheck: yes
+        enabled: yes
+      register: clickhouse_repo
+
+    - name: yum_clean_metadata
+      become: yes
+      ansible.builtin.command: yum clean metadata
+      args:
+        warn: no
+      when: clickhouse_repo.changed
+
+    - name: Clickhouse | Install packages
+      ansible.builtin.dnf:
+        name:
+          - clickhouse-client = {{ clickhouse_version }}
+          - clickhouse-server = {{ clickhouse_version }}
+          - clickhouse-common-static = {{ clickhouse_version }}
+        state: present
+
+    - name: start_clickhouse_service
+      become: yes
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: started
+        enabled: yes
+
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Clickhouse | Install
+  become: yes
+  block:
+    - name: Clickhouse | Add key
+      ansible.builtin.apt_key:
+        keyserver: hkp://keyserver.ubuntu.com:80
+        id: 8919F6BD2B48D754
+
+    - name: Clickhouse | Add repository
+      ansible.builtin.apt_repository:
+        repo: deb {{ clickhouse_repo_deb }}
+        state: present
+        filename: clickhouse
+
+    - name: Clickhouse | Install packages
+      ansible.builtin.apt:
+        name:
+          - clickhouse-client={{ clickhouse_version }}
+          - clickhouse-server={{ clickhouse_version }}
+          - clickhouse-common-static={{ clickhouse_version }}
+        state: present
+
+    - name: start_clickhouse_service
+      become: yes
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: started
+        enabled: yes
+
+  when: ansible_facts['os_family'] == "Debian"

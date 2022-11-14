@@ -1,0 +1,22 @@
+---
+#vector vars
+vector_version: "0.23.3"
+vector_gpg_key: "https://repositories.timber.io/public/vector/gpg.3543DB2D0A2BC4B8.key"
+vector_config:
+  sources:
+    our_log:
+      type: file
+      ignore_older_secs: 600
+      include:
+        - /var/log/*.log
+      read_from: beginning
+  sinks:
+    to_clickhouse:
+      type: clickhouse
+      inputs:
+        - our_log
+      database: logs
+      endpoint: http://51.250.64.149:8183
+      table: my_table
+      compression: gzip
+      healthcheck: false

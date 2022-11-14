@@ -1,0 +1,21 @@
+---
+${ ansible_group }:
+  children:
+    ${clickhouse_host_name}:
+      hosts:
+%{ for index, ip in clickhouse_host_ip ~}
+        ${clickhouse_host_name}-${index + 1 }:
+          ansible_host: ${ip}
+%{ endfor ~}
+    ${lighthouse_host_name}:
+      hosts:
+%{ for index, ip in lighthouse_host_ip ~}
+        ${lighthouse_host_name}-${index + 1 }:
+          ansible_host: ${ip}
+%{ endfor ~}
+    ${server_host_name}:
+      hosts:
+%{ for index, ip in server_host_ip ~}
+        ${server_host_name}-${index + 1 }:
+          ansible_host: ${ip}
+%{ endfor ~}

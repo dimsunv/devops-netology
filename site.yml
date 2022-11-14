@@ -1,0 +1,44 @@
+---
+- name: Clickhouse | Install
+  hosts: clickhouse
+  tasks:
+    - name: install clickhouse
+      include_tasks: clickhouse.yml
+
+    - name: Clickhouse | Create database
+      ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc != 82
+      changed_when: create_db.rc == 0
+
+- name: Lighthouse | Install
+  hosts: lighthouse
+  tasks:
+    - name: install nginx
+      include_tasks: nginx.yml
+
+    - name: Lighthouse | Get repository
+      become: yes
+      git:
+        repo: "{{ lighthouse_repo }}"
+        version: master
+        dest: "{{ lighthouse_dir }}"
+
+    - name: create lighthouse.conf
+      become: yes
+      ansible.builtin.template:
+        src: lighthouse.conf.j2
+        dest: /etc/nginx/conf.d/default.conf
+        mode: "0755"
+      register: lighthouse_config
+
+    - name: restart nginx
+      become: yes
+      ansible.builtin.command: nginx -s reload
+      when: lighthouse_config.changed
+
+- name: Vector | Install
+  hosts: server
+  tasks:
+    - name: install vector
+      include_tasks: vector.yml

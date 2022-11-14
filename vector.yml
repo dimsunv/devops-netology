@@ -1,0 +1,69 @@
+---
+- name: Vector | Install
+  become: yes
+  block:
+    - name: Vector | Add repository
+      ansible.builtin.yum_repository:
+        name: timber-vector
+        description: timber-vector
+        async: no
+        baseurl: https://repositories.timber.io/public/vector/rpm/el/$releasever/$basearch
+        gpgkey: https://repositories.timber.io/public/vector/gpg.3543DB2D0A2BC4B8.key
+        gpgcheck: yes
+        enabled: yes
+        file: timber-vector
+
+    - name: Vector | Install package
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - vector = {{ vector_version }}
+        state: present
+
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Add repository
+  become: yes
+  block:
+    - name: Vector | Add key
+      ansible.builtin.apt_key:
+        url: "{{ vector_gpg_key }}"
+        state: present
+
+    - name: Vector | Add repository
+      ansible.builtin.apt_repository:
+        repo: deb https://repositories.timber.io/public/vector/deb/{{ansible_facts.distribution|lower}}/ {{ansible_facts.distribution_release|lower}} main
+        state: present
+        filename: timber-vector
+
+    - name: Vector | Install package
+      become: true
+      ansible.builtin.apt:
+        name:
+          - vector={{ vector_version }}-1
+        state: present
+
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Vector | config
+  become: yes
+  ansible.builtin.template:
+    src: vector.yml.j2
+    dest: /etc/vector/vector.yml
+    mode: "0750"
+
+- name: Create vector service
+  become: yes
+  ansible.builtin.template:
+    src: vector.service.j2
+    dest: /etc/systemd/system/vector.service
+    mode: "0644"
+    owner: "root"
+    group: "root"
+
+- name: Start vector service
+  become: yes
+  ansible.builtin.service:
+    name: vector
+    state: started
+    enabled: yes

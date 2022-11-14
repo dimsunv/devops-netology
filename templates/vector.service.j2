@@ -1,0 +1,12 @@
+[Unit]
+Description=Vector service
+After=network.target
+Requires=network-online.target
+[Service]
+User=root
+Group=root
+ExecStart=/usr/bin/vector --config-yaml /etc/vector/vector.yml --watch-config
+Restart=always
+[Install]
+WantedBy=multi-user.target
+Alias=vector.service

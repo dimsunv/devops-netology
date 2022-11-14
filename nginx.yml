@@ -1,0 +1,82 @@
+---
+- name: Nginx | Install
+  become: yes
+  block:
+    - name: Nginx | Add repository
+      become: yes
+      ansible.builtin.yum_repository:
+        name: nginx-stable
+        description: nginx stable repo
+        async: no
+        baseurl: http://nginx.org/packages/{{ansible_facts.distribution|lower}}/$releasever/$basearch/
+        gpgkey: https://nginx.org/keys/nginx_signing.key
+        gpgcheck: yes
+        enabled: yes
+        module_hotfixes: yes
+        file: nginx
+      register: nginx_repo
+
+    - name: yum_clean_metadata
+      become: yes
+      ansible.builtin.command: yum clean metadata
+      args:
+        warn: no
+      when: nginx_repo.changed
+
+    - name: Nginx | Install
+      ansible.builtin.dnf:
+        name:
+          - git-2.31.1
+          - nginx-{{ nginx_version }}
+        state: present
+
+    - name: start_nginx_service
+      become: yes
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Nginx | Install
+  become: yes
+  block:
+    - name: Nginx | Add key
+      ansible.builtin.apt_key:
+        url: "{{ nginx_gpg_key }}"
+        state: present
+
+    - name: Nginx | Add repository
+      ansible.builtin.apt_repository:
+        repo: deb http://nginx.org/packages/{{ansible_facts.distribution|lower}}/ {{ansible_facts.distribution_release|lower}} nginx
+        state: present
+        filename: nginx
+
+    - name: Nginx | Install
+      ansible.builtin.apt:
+        name:
+          - nginx={{ nginx_version }}-1~{{ansible_facts.distribution_release|lower}}
+        state: present
+
+    - name: start_nginx_service
+      become: yes
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: create nginx.conf
+  become: yes
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: "0644"
+  register: nginx_config
+
+- name: restart nginx
+  become: yes
+  ansible.builtin.command: nginx -s reload
+  when: nginx_config.changed
