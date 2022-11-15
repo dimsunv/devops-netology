@@ -40,3 +40,6 @@
 - [ 09-CICD-01](./09-ci-01-jira)
 - [ 09-CICD-03](./09-ci-03-cicd)
 - [ 09-CICD-04](./09-ci-04-jenkins)
+- [ 10-monitoring-01](./10-monitoring-01-base)
+- [ 10-monitoring-02](./10-monitoring-02-systems)
+- [ 10-monitoring-03](./10-monitoring-03-grafana)
