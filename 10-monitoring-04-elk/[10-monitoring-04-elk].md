@@ -50,6 +50,7 @@ Filebeat следует сконфигурировать для отправки
 
 <details>
 <summary>opensearch cluster docker ps</summary>
+
 ```
 boliwar@opensearch-cluster:~$ docker ps
 CONTAINER ID   IMAGE                                                                COMMAND                  CREATED         STATUS         PORTS                                                                                                      NAMES
@@ -59,14 +60,15 @@ fe39fa68f6ed   opensearchproject/opensearch:2.4.0                               
 8a79f8f35fbb   opensearchproject/opensearch:2.4.0                                   "./opensearch-docker…"   4 minutes ago   Up 4 minutes   9200/tcp, 9300/tcp, 9600/tcp, 9650/tcp                                                                     opensearch_os03_1
 426a6d0d3717   opensearchproject/opensearch:2.4.0                                   "./opensearch-docker…"   4 minutes ago   Up 4 minutes   9200/tcp, 9300/tcp, 9600/tcp, 9650/tcp                                                                     opensearch_os01_1
 cd09839711ea   opensearchproject/logstash-oss-with-opensearch-output-plugin:8.4.0   "/usr/local/bin/dock…"   4 minutes ago   Up 4 minutes   5044/tcp, 0.0.0.0:5000->5000/tcp, :::5000->5000/tcp, 9600/tcp                                              opensearch_logstash_1
-
 ```
+
 </details>
 
-![](img/kibana.png)
+* ![](img/kibana.png)
 
 <details>
 <summary>opensearch cluster docker-compose.yml</summary>
+
 ```
 version: '3.7'
 
@@ -230,12 +232,13 @@ volumes:
 networks:
   os-test:
    driver: bridge
-
 ```
+
 </details>
 
 <details>
 <summary>vector docker-compose.yml</summary>
+
 ```
 version: '3.7'
 
@@ -259,10 +262,12 @@ networks:
   net:
     driver: bridge
 ```
+
 </details>
 
 <details>
 <summary>opensearch.yml</summary>
+
 ```
 ---
 cluster.name: os-cluster
@@ -289,10 +294,12 @@ plugins.security.nodes_dn:
   - 'CN=os02,O=NETOLOGY,L=SPB,ST=SPB,C=RU'
   - 'CN=os03,O=NETOLOGY,L=SPB,ST=SPB,C=RU'
 ```
+
 </details>
 
 <details>
 <summary>opensearch-dashboard.yml</summary>
+
 ```
 ---
 server.name: os_dashboards
@@ -310,10 +317,12 @@ server.ssl.key: "/usr/share/opensearch-dashboards/config/certificates/os-dashboa
 opensearch.ssl.certificateAuthorities: ["/usr/share/opensearch-dashboards/config/certificates/ca/ca.pem"]
 opensearch.ssl.verificationMode: full
 ```
+
 </details>
 
 <details>
 <summary>logstash.yml</summary>
+
 ```
 input {
   tcp {
@@ -335,6 +344,7 @@ output {
   }
 }
 ```
+
 </details>
 
 ## Задание 2
