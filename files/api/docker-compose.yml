@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  vector:
+    image: timberio/vector:0.25.2-debian
+    volumes:
+      - "./vector/vector.yml:/etc/vector/vector.yml"
+      - "/var/run:/var/run"
+    command: " --config-yaml /etc/vector/vector.yml --watch-config"
+    networks:
+      - net
+  python:
+    image: logs/python
+    build: ./python
+    container_name: api-app
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge

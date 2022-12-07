@@ -1,0 +1,20 @@
+---
+api:
+  enabled: true
+  address: "[::]:8686"
+  playground: false
+sinks:
+  opensearch:
+    type: socket
+    inputs:
+      - docker_logs
+    address: "{{ hostvars['opensearch-cluster'].ansible_default_ipv4['address'] }}:5000"
+    mode: tcp
+    encoding:
+      codec: json
+sources:
+  docker_logs:
+    type: docker_logs
+    docker_host: /var/run/docker.sock
+    exclude_containers:
+      - api_vector_1

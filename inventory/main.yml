@@ -1,0 +1,7 @@
+---
+prod:
+  hosts:
+    opensearch-cluster:
+      ansible_host: 51.250.81.254
+    api-server:
+      ansible_host: 62.84.127.35

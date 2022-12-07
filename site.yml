@@ -1,0 +1,66 @@
+---
+- name: Docker install
+  become: yes
+  hosts: all
+  roles:
+    - ansible-docker
+    - ansible-pip
+
+- name: Opensearch cluster install
+  hosts: opensearch-cluster
+  tasks:
+    - name: create build directory
+      file:
+        path: ~/opensearch
+        state: directory
+
+    - name: copy files
+      ansible.posix.synchronize:
+        src: ./files/opensearch/
+        dest: ~/opensearch
+
+    - name: host's ulimits
+      become: yes
+      ansible.builtin.shell: sysctl -w vm.max_map_count=512000
+
+    - name: Run create certificates
+      ansible.builtin.shell:
+        chdir: ~/opensearch
+        cmd: bash generate-certs.sh
+
+    - name: deploy Opensearch Docker Compose
+      community.docker.docker_compose:
+        project_src: ~/opensearch
+        files: docker-compose.yml
+
+    - name: Pause for 120s to build
+      ansible.builtin.pause:
+        seconds: 120
+
+    - name: Run securityadmin
+      ansible.builtin.shell:
+        chdir: ~/opensearch
+        cmd: docker-compose exec os01 bash -c "chmod +x plugins/opensearch-security/tools/securityadmin.sh && bash plugins/opensearch-security/tools/securityadmin.sh -cd config/opensearch-security -icl -nhnv -cacert config/certificates/ca/ca.pem -cert config/certificates/ca/admin.pem -key config/certificates/ca/admin.key -h localhost"
+
+- name: Api install
+  hosts: api-server
+  tasks:
+    - name: create build directory
+      file:
+        path: ~/api
+        state: directory
+
+    - name: copy files
+      ansible.posix.synchronize:
+        src: ./files/api/
+        dest: ~/api/
+
+    - name: template
+      ansible.builtin.template:
+        src: vector.yml.j2
+        dest: ~/api/vector/vector.yml
+
+    - name: deploy API Docker Compose
+      community.docker.docker_compose:
+        project_src: ~/api
+        files: docker-compose.yml

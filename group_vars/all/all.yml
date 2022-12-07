@@ -1,0 +1,7 @@
+---
+docker_compose_version: "v2.14.0"
+docker_users: []
+
+pip_install_packages:
+  - name: docker
+  - name: docker-compose

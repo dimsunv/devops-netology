@@ -1,0 +1,10 @@
+---
+- name: ansible-docker
+  src: git@github.com:geerlingguy/ansible-role-docker
+  scm: git
+  version: "6.0.4"
+
+- name: ansible-pip
+  src: git@github.com:geerlingguy/ansible-role-pip
+  scm: git
+  version: "2.2.0"
