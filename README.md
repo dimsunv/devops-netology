@@ -43,5 +43,6 @@
 - [ 10-monitoring-01](./10-monitoring-01-base)
 - [ 10-monitoring-02](./10-monitoring-02-systems)
 - [ 10-monitoring-03](./10-monitoring-03-grafana)
+- [ 10-monitoring-04](./10-monitoring-04-elk)
 - [ 11-microservices-01](./11-microservices-01-intro)
 - [ 11-microservices-02](./11-microservices-02-principles)
