@@ -46,3 +46,4 @@
 - [ 10-monitoring-04](./10-monitoring-04-elk)
 - [ 11-microservices-01](./11-microservices-01-intro)
 - [ 11-microservices-02](./11-microservices-02-principles)
+- [ 11-microservices-03](./11-microservices-03-approaches)
