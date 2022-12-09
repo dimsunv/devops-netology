@@ -1,0 +1,20 @@
+---
+api:
+  enabled: true
+  address: "[::]:8686"
+  playground: false
+sinks:
+  opensearch:
+    type: socket
+    inputs:
+      - nginx
+    address: "{{ hostvars['opensearch-cluster'].ansible_default_ipv4['address'] }}:5000"
+    mode: tcp
+    encoding:
+      codec: json
+sources:
+  nginx:
+    include:
+      - "/var/log/nginx/*.log"
+    type: file
+    ignore_checkpoints: true

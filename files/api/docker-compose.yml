@@ -1,0 +1,138 @@
+version: '3.7'
+
+volumes:
+  data: {}
+  prometheus-data: {}
+  grafana_data: {}
+
+services:
+  storage:
+    image: minio/minio:latest
+    container_name: storage
+    command: server /data --console-address ":9001"
+    restart: always
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+        MINIO_ROOT_USER: ${Storage_AccessKey:-STORAGE_ACCESS_KEY}
+        MINIO_ROOT_PASSWORD: ${Storage_Secret:-STORAGE_SECRET_KEY}
+        MINIO_PROMETHEUS_AUTH_TYPE: public
+    volumes:
+      - data:/data
+    networks:
+      - minio-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  createbuckets:
+    image: minio/mc
+    container_name: bucket
+    networks:
+      - minio-net
+    depends_on:
+      - storage
+    restart: on-failure
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add storage http://storage:9000 ${Storage_AccessKey-STORAGE_ACCESS_KEY} ${Storage_Secret-STORAGE_SECRET_KEY} &&
+      /usr/bin/mc mb --ignore-existing storage/${Storage_Bucket:-data} &&
+      /usr/bin/mc policy set download storage/${Storage_Bucket:-data} &&
+      exit 0;
+      "
+
+  uploader:
+    image: netology/uploader
+    build: ./uploader
+    container_name: uploader
+    networks:
+      - minio-net
+    depends_on:
+      - storage
+      - createbuckets
+    expose:
+      - 3000
+    environment:
+      PORT: 3000
+      S3_HOST: storage
+      S3_PORT: 9000
+      S3_ACCESS_KEY: ${Storage_AccessKey:-STORAGE_ACCESS_KEY}
+      S3_ACCESS_SECRET: ${Storage_Secret:-STORAGE_SECRET_KEY}
+      S3_BUCKET: ${Storage_Bucket:-STORAGE_BUCKET}
+
+  security:
+    image: netology/security
+    build: ./security
+    container_name: security
+    networks:
+      - minio-net
+    expose:
+      - 3000
+    environment:
+      PORT: 3000
+
+  gateway:
+    image: gateway/nginx
+    build: ./nginx
+    container_name: nginx
+    volumes:
+      - "/var/log/nginx:/var/log/nginx"
+    ports:
+      - "80:8080"
+    networks:
+      - minio-net
+    depends_on:
+      - storage
+      - uploader
+
+  vector:
+    image: timberio/vector:0.25.2-debian
+    volumes:
+      - "/var/log/nginx:/var/log/nginx"
+      - "./vector/vector.yml:/etc/vector/vector.yml"
+    command: " --config-yaml /etc/vector/vector.yml --watch-config"
+    networks:
+      - minio-net
+    depends_on:
+      - gateway
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 8080:8080
+    networks:
+      - minio-net
+    restart: always
+
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /:/host:ro,rslave
+    command:
+      - '--path.rootfs=/host'
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    ports:
+      - 9100:9100
+    networks:
+      - minio-net
+    restart: always
+
+
+
+networks:
+  minio-net:
+   driver: bridge

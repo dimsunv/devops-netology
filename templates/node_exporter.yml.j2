@@ -1,0 +1,5 @@
+---
+- targets:
+    - '{{ hostvars['opensearch-cluster'].ansible_default_ipv4['address'] }}:9100'
+    - '{{ hostvars['api-server'].ansible_default_ipv4['address'] }}:9100'
+    - 'node-exporter:9100'

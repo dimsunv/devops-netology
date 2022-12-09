@@ -1,0 +1,9 @@
+---
+prod:
+  hosts:
+    opensearch-cluster:
+      ansible_host:
+    api-server:
+      ansible_host:
+    monitoring-server:
+      ansible_host:
