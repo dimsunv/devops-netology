@@ -88,10 +88,10 @@
 docker compose файл запустив который можно перейти по адресу http://localhost:8081 по которому доступна Kibana.
 Логин в Kibana должен быть admin пароль qwerty123456
 
-<details>
-<summary>Opensearch docker-compose.yml</summary>
-
 ![](img/opensearch.png)
+
+<details>
+<summary>***Opensearch docker-compose.yml***</summary>
 
 ```
 version: '3.7'
@@ -310,10 +310,10 @@ docker compose файл запустив который можно перейт�
 
 ---
 
-<details>
-<summary>Дополнительные ссылки</summary>
-
 ![](img/grafana.png)
+
+<details>
+<summary>***Prometheus docker-compose.yml***</summary>
 
 ```
 version: '3.7'
