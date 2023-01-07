@@ -47,3 +47,4 @@
 - [ 11-microservices-01](./11-microservices-01-intro)
 - [ 11-microservices-02](./11-microservices-02-principles)
 - [ 11-microservices-03](./11-microservices-03-approaches)
+- [ 12-kubernetes-01 ](./12-kubernetes-01-intro)
