@@ -1,0 +1,9 @@
+---
+- name: Roles install
+  become: yes
+  hosts: minikube_cluster
+  roles:
+    - ansible-docker
+    - ansible-pip
+    - ansible-minikube
+    - hello-app

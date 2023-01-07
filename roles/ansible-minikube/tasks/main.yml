@@ -1,0 +1,27 @@
+---
+# tasks file for ansible-minikube
+- name: Minikube | Install
+  ansible.builtin.include_tasks: "{{ ansible_pkg_mgr }}/install.yml"
+
+- name: Kubectl | Install utility
+  ansible.builtin.get_url:
+    url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: '0755'
+
+- name: Minikube starting
+  become: false
+  ansible.builtin.command:
+    argv:
+      - minikube
+      - start
+
+- name: Minikube | Addons
+  become: false
+  ansible.builtin.command:
+    argv:
+      - minikube
+      - addons
+      - enable
+      - "{{ item }}"
+  loop: "{{ addons }}"

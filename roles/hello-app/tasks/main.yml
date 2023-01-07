@@ -1,0 +1,58 @@
+---
+# tasks file for hello-app
+- name: Create a k8s namespace
+  become: false
+  kubernetes.core.k8s:
+    name: "{{ kube_namespace }}"
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: hello-app | Create a deployment
+  become: false
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Deployment
+      metadata:
+        name: hello-node
+        labels:
+          app: hello-node
+        namespace: "{{ kube_namespace }}"
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: hello-node
+        template:
+          metadata:
+            labels:
+              app: hello-node
+          spec:
+            containers:
+            - image: k8s.gcr.io/echoserver:1.4
+              imagePullPolicy: IfNotPresent
+              name: echoserver
+
+- name: hello-app | Create a service
+  become: false
+  kubernetes.core.k8s:
+    state: present
+    wait: yes
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        labels:
+          app: hello-node
+        name: hello-node
+        namespace: "{{ kube_namespace }}"
+      spec:
+        ports:
+        - port: "{{ service_port }}"
+          protocol: TCP
+          targetPort: 8080
+        selector:
+          app: hello-node
+        type: LoadBalancer
