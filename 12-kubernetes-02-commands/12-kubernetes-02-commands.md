@@ -98,6 +98,7 @@ hello-node   2/2     2            2           29s
 <details>
 <summary>deployment.yaml</summary>
 
+```YAML
 ---
 #create namespace
 apiVersion: v1
@@ -137,6 +138,7 @@ spec:
           image: k8s.gcr.io/echoserver:1.4
           ports:
             - containerPort: 8080
+```
 
 </details>
 
@@ -205,6 +207,7 @@ root@netology:/home/developer# mkdir .kube && nano .kube/config
 <details>
 <summary>config</summary>
 
+```YAML
 apiVersion: v1
 clusters:
 - cluster:
@@ -224,6 +227,7 @@ users:
   user:
     client-certificate: /home/developer/.certs/developer.crt
     client-key: /home/developer/.certs/developer.key
+```
 
 </details>
 
@@ -255,6 +259,7 @@ no
 <details>
 <summary>permits.yaml</summary>
 
+```YAML
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -278,6 +283,7 @@ roleRef:
   kind: Role
   name: app-log-reader
   apiGroup: rbac.authorization.k8s.io
+```
 
 </details>
 
