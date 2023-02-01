@@ -181,7 +181,7 @@ root@netology:/home/developer# openssl genrsa -out developer.key 2048
 root@netology:/home/developer# openssl req -new -key developer.key -out developer.csr -subj "/CN=developer"
 root@netology:/home/developer# openssl x509 -req -in developer.csr -CA /home/boliwar/.minikube/ca.crt -CAkey /home/boliwar/.minikube/ca.key -CAcreateserial -out developer.crt -days 500
 root@netology:/home/developer# mkdir .certs && mv developer.crt developer.key .certs
-root@netology:/home/developer# mkdir /mimikube && cp /home/boliwar/.minikube/ca.crt /home/developer/.minikube/ca.crt
+root@netology:/home/developer# mkdir /.mimikube && cp /home/boliwar/.minikube/ca.crt /home/developer/.minikube/ca.crt
 ```
 
 * Добавим пользователя в кластер:
