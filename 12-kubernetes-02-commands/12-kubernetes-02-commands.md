@@ -28,7 +28,8 @@ hello-56c75d54f7-9k8gd   1/1     Running   0          105s
 * но лучше использовать декларативный метод с помощью yaml файлов. В дальнейшем это позволит использовать контроль версий наших проектов.
 
 <details>
-<summary>***deployment.yaml***</summary>
+<summary>deployment.yaml</summary>
+
 ---
 #deployment settings
 apiVersion: apps/v1
@@ -56,10 +57,11 @@ spec:
         app: hello-node
     spec:
       containers:
-      - name: hello-node
-        image: k8s.gcr.io/echoserver:1.4
-        ports:
-        - containerPort: 8080
+        - name: hello-node
+          image: k8s.gcr.io/echoserver:1.4
+          ports:
+            - containerPort: 8080
+
 </details>
 
 * Создадим deployment используя `deployment.yaml`
@@ -92,7 +94,8 @@ hello-node   2/2     2            2           29s
 * Для начала создадим пространство имен добавив в начало `deployment.yaml` конфигурцию namespace и пропишем namespace `app-namespace` в конфигурации `deployment` и `pod`
 
 <details>
-<summary>***deployment.yaml***</summary>
+<summary>deployment.yaml</summary>
+
 ---
 #create namespace
 apiVersion: v1
@@ -131,7 +134,8 @@ spec:
         - name: hello-node
           image: k8s.gcr.io/echoserver:1.4
           ports:
-          - containerPort: 8080
+            - containerPort: 8080
+
 </details>
 
 ```
@@ -197,7 +201,8 @@ root@netology:/home/developer# mkdir .kube && nano .kube/config
 * следующего содержания:
 
 <details>
-<summary>***config***</summary>
+<summary>config</summary>
+
 apiVersion: v1
 clusters:
 - cluster:
@@ -217,6 +222,7 @@ users:
   user:
     client-certificate: /home/developer/.certs/developer.crt
     client-key: /home/developer/.certs/developer.key
+
 </details>
 
 * Предоставим права пользователю ко всем ранее созданным файлам и директориям:
@@ -245,7 +251,8 @@ no
 * Для доступа неоходимо создать `Role` и `RoleBinding`. Создадим файл `permits.yaml`:
 
 <details>
-<summary>***permits.yaml***</summary>
+<summary>permits.yaml</summary>
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -269,6 +276,7 @@ roleRef:
   kind: Role
   name: app-log-reader
   apiGroup: rbac.authorization.k8s.io
+
 </details>
 
 ```
