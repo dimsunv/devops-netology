@@ -211,7 +211,7 @@ root@netology:/home/developer# mkdir .kube && nano .kube/config
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority: /home/boliwar/.minikube/ca.crt
+    certificate-authority: /home/developer/.minikube/ca.crt
     server: https://192.168.49.2:8443
   name: minikube
 contexts:
