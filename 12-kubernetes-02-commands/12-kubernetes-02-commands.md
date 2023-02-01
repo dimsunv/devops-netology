@@ -28,7 +28,8 @@ hello-56c75d54f7-9k8gd   1/1     Running   0          105s
 * но лучше использовать декларативный метод с помощью yaml файлов. В дальнейшем это позволит использовать контроль версий наших проектов.
 
 <details>
-<summary>deployment.yaml</summary>
+<summary> deployment.yaml </summary>
+
 ```YAML
 ---
 #deployment settings
@@ -62,6 +63,7 @@ spec:
           ports:
             - containerPort: 8080
 ```
+
 </details>
 
 * Создадим deployment используя `deployment.yaml`
