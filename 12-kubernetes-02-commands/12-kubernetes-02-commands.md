@@ -29,7 +29,7 @@ hello-56c75d54f7-9k8gd   1/1     Running   0          105s
 
 <details>
 <summary>deployment.yaml</summary>
-
+/**
 ---
 #deployment settings
 apiVersion: apps/v1
@@ -61,7 +61,7 @@ spec:
           image: k8s.gcr.io/echoserver:1.4
           ports:
             - containerPort: 8080
-
+*/
 </details>
 
 * Создадим deployment используя `deployment.yaml`
