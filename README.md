@@ -49,4 +49,5 @@
 - [ 11-microservices-03](./11-microservices-03-approaches)
 - [ 12-kubernetes-01 ](./12-kubernetes-01-intro)
 - [ 12-kubernetes-02 ](./12-kubernetes-02-commands)
-- [12-kubernetes-03](./12-kubernetes-03-install-part-1)
+- [ 12-kubernetes-03 ](./12-kubernetes-03-install-part-1)
+- [ 12-kubernetes-04 ](./12-kubernetes-04-install-part-2)
