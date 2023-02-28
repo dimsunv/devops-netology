@@ -346,3 +346,4 @@ node-4   Ready    <none>          177m   v1.26.1
 node-5   Ready    <none>          177m   v1.26.1
 ```
 
+[terraform resources](https://github.com/dimsunv/devops-netology/tree/12-kubernetes-04-install-part-2)
