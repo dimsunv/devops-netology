@@ -51,3 +51,4 @@
 - [ 12-kubernetes-02 ](./12-kubernetes-02-commands)
 - [ 12-kubernetes-03 ](./12-kubernetes-03-install-part-1)
 - [ 12-kubernetes-04 ](./12-kubernetes-04-install-part-2)
+- [ 12-kubernetes-05 ](./12-kubernetes-05-cni)
