@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - image: boliwar/frontend:1.0.0
+        name: frontend
+        ports:
+          - containerPort: 80
+        env:
+          - name: BASE_URL
+            value: http://backend:9000

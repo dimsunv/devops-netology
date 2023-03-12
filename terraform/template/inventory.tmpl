@@ -1,0 +1,25 @@
+---
+all:
+  hosts:
+%{ for index, ip in node_host_ip ~}
+    ${node_host_name}-${index + 1 }:
+      ansible_host: ${ip}
+%{ endfor ~}
+  children:
+    kube_control_plane:
+      hosts:
+        node-1:
+    kube_node:
+      hosts:
+        node-1:
+        node-2:
+        node-3:
+    etcd:
+      hosts:
+        node-1:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+        kube_node:
+    calico_rr:
+      hosts: {}
