@@ -53,3 +53,4 @@
 - [12-kubernetes-04](./12-kubernetes-04-install-part-2)
 - [12-kubernetes-05](./12-kubernetes-05-cni)
 - [13-kubernetes-config-01](./13-kubernetes-config-01-objects)
+- [13-kubernetes-config-02](./13-kubernetes-config-02-mounts)
