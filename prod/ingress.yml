@@ -1,0 +1,43 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  namespace: prod
+spec:
+  rules:
+  - host: homework.netology
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend
+  namespace: prod
+spec:
+  rules:
+  - host: homework.netology
+    http:
+      paths:
+      - pathType: Prefix
+        path: /api
+        backend:
+          service:
+            name: backend
+            port:
+              number: 9000
+      - pathType: Prefix
+        path: /api/news
+        backend:
+          service:
+            name: backend
+            port:
+              number: 9000
