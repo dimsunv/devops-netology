@@ -109,6 +109,8 @@ tmpfs                                                           256M   12K  256M
 tmpfs                                                           1.9G     0  1.9G   0% /proc/acpi
 tmpfs                                                           1.9G     0  1.9G   0% /proc/scsi
 tmpfs                                                           1.9G     0  1.9G   0% /sys/firmware
+```
+
 ---
 
 [Исходники](https://github.com/dimsunv/devops-netology/tree/13-kubernetes-config-02-mounts)
