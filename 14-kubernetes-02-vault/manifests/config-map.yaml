@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configmap
+data:
+  scrypt.py: |
+    import hvac
+    import os
+
+    client = hvac.Client(
+        url = os.environ['VAULT_URL'],
+        token = os.environ['VAULT_TOKEN']
+    )
+
+    client.is_authenticated()
+    
+    # Пишем секрет
+    pull_secret = client.secrets.kv.v2.create_or_update_secret(
+        path='hvac',
+        secret=dict(netology='Big secret!!!'),
+    )
+    
+    print(pull_secret)
+
+    # Читаем секрет
+    push_secret = client.secrets.kv.v2.read_secret_version(
+        path='hvac',
+    )
+
+    print(push_secret)

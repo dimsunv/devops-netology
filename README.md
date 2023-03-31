@@ -54,3 +54,6 @@
 - [12-kubernetes-05](./12-kubernetes-05-cni)
 - [13-kubernetes-config-01](./13-kubernetes-config-01-objects)
 - [13-kubernetes-config-02](./13-kubernetes-config-02-mounts)
+- [13-kubernetes-config-03](./13-kubernetes-config-03-kubectl)
+- [13-kubernetes-config-04](./13-kubernetes-config-04-helm)
+- [14-kubernetes-01](./14-kubernetes-01-secrets)

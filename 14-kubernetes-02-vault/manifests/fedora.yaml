@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fedora
+spec:
+  containers:
+    - image: fedora
+      name: fedora
+      command: ["/bin/bash"]
+      args: ["-c", "dnf -y install pip && pip install hvac && sleep infinity"]
+      env:
+        - name: VAULT_URL
+          value: http://vault:8200
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: token
+              key: VAULT_TOKEN
+      volumeMounts:
+        - name: scrypt
+          mountPath: /python
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+        requests:
+          cpu: 250m
+          memory: 512Mi
+  volumes:
+    - name: token
+      secret:
+        secretName: cred
+        optional: true
+    - name: scrypt
+      configMap:
+        name: my-configmap
+  restartPolicy: Never
