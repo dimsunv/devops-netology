@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - image: boliwar/frontend:1.0.0
+        name: frontend
+        ports:
+          - containerPort: 80
+        env:
+          - name: BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: my-configmap
+                key: BASE_URL
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx/conf.d
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+      volumes:
+      - name: nginx
+        configMap:
+          name: my-configmap

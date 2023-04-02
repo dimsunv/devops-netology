@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - image: boliwar/backend:1.0.1
+        name: backend
+        ports:
+          - containerPort: 9000
+        env:
+          - name: DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: my-configmap
+                key: DB_NAME
+          - name: DB_URL
+            valueFrom:
+              configMapKeyRef:
+                name: my-configmap
+                key: DB_URL
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: my-secrets
+                key: DB_USER
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: my-secrets
+                key: DB_PASS
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
