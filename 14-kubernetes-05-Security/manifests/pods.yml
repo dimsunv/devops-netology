@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+  labels:
+    app: pod-1
+spec:
+  containers:
+    - image: wbitt/network-multitool
+      name: multitool-1
+      ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+  labels:
+    app: pod-2
+spec:
+  containers:
+    - image: wbitt/network-multitool
+      name: multitool-2
+      ports:
+        - containerPort: 80
