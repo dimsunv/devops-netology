@@ -1,0 +1,13 @@
+Host *
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host bastion
+    IdentityFile ~/.ssh/id_rsa_2048
+    User boliwar
+    Hostname ${bastion_ip}
+
+Host 192.168.20.*
+    IdentityFile ~/.ssh/id_rsa_2048
+    User boliwar
+    ProxyCommand ssh bastion -W %h:%p
